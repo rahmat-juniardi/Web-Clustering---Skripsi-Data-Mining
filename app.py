@@ -46,11 +46,11 @@ def cleaning():
 
     if request.method == 'POST':
         load = request.files['file']
-        load.save(os.path.join('data','Data UKM Pendataan Verifikasi Periode II 2021-2022_Dinas PKU - tanpa NIK.xlsx'))
+        load.save(os.path.join('data','UKM Fashion & UKM Kerajinan - Data UKM Pendataan Verifikasi Periode II 2021-2022_Dinas PKU.xlsx'))
         
         # PREPROCESSING DATA 
         # CLEANING DATA
-        df = pd.read_excel (r'data\Data UKM Pendataan Verifikasi Periode II 2021-2022_Dinas PKU - tanpa NIK.xlsx')
+        df = pd.read_excel (r'data\UKM Fashion & UKM Kerajinan - Data UKM Pendataan Verifikasi Periode II 2021-2022_Dinas PKU.xlsx')
         df_cleaning = df
         df.index = np.arange(1, len(df) + 1)
 
@@ -131,7 +131,7 @@ def cluster():
     plt.figure(figsize=(300, 50))
     plt.title("Dendograms")
     dend = shc.dendrogram(shc.linkage(df_transformed, method='average'))
-    plt.savefig('static/img/dendogram.png', format='png', bbox_inches='tight')
+    plt.savefig('static/images/dendogram.png', format='png', bbox_inches='tight')
 
     ##CLUSTERING
     clustering = AgglomerativeClustering(n_clusters= int(var_cluster), affinity='euclidean', linkage='average')
@@ -179,7 +179,7 @@ def cluster():
     diagram_pie = pd.DataFrame(Data,columns=['Chart'],index = ['Cluster 0','Cluster 1', 'Cluster 2', 'Cluster 3', 'Cluster 4','Cluster 5', 'Cluster 6', 'Cluster 7','Cluster 8'])
 
     diagram_pie.plot.pie(y='Chart',figsize=(8,8),autopct='%1.2f%%', startangle=70)
-    plt.savefig('static/img/chart.png', format='png', bbox_inches='tight')
+    plt.savefig('static/images/chart.png', format='png', bbox_inches='tight')
 
     return render_template('cluster.html',data_hasil=[data_print_cluster.to_html(classes="table table-bordered hover",table_id="data")],cluster_count=var_cluster,slh=silh_avg_score_)
 
